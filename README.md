@@ -31,7 +31,7 @@ CREATE TABLE user (
 # 2. Membuat Model User
 Selanjutnya adalah membuat Model untuk memproses data Login. Buat file baru pada direktori app/Models dengan nama UserModel.php
 
-```
+```php
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
@@ -50,7 +50,7 @@ Buat Controller baru dengan nama User.php pada direktori app/Controllers.
 
 Kemudian tambahkan method index() untuk menampilkan daftar user, dan method login() untuk proses login.
 
-```
+```php
 <?php
 
 namespace App\Controllers;
@@ -112,7 +112,7 @@ class User extends BaseController
 # 4. Membuat View Login
 Buat direktori baru dengan nama user pada direktori app/views, kemudian buat file baru dengan nama login.php.
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 	<head>
