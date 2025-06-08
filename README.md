@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Praktikum ke 4 - 6
 
 <p align='center'>
