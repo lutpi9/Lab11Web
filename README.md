@@ -1,28 +1,3 @@
-# Praktikum ke 4 - 6
-
-<p align='center'>
-    <img src=img/php.png width="120px" height="120px">
-    <img src=img/ci.png width="120px" height="120px">
-</p>
-
-## Profil
-
-|                 |                        |
-| --------------- | ---------------------- |
-| **Nama**        | Muhammad Nurul Firdaus |
-| **Kelas**       | TI.23.A.5              |
-| **Mata Kuliah** | Pemrograman Web 2      |
-
-## Langkah-langkah Praktikum
-
-### **Praktikum 4: Membuat Sistem Login**
-
-#### 1. Persiapkan Database
-
-Buat tabel `user` pada database dengan SQL berikut:
-
-```sql
-=======
 # PRAKTIKUM 4-6
 
 ![CodeIgniter Badge](https://img.shields.io/badge/CodeIgniter-%23EF4223.svg?style=for-the-badge&logo=codeIgniter&logoColor=white)
@@ -42,8 +17,7 @@ Untuk memulai membuat modul Login, yang perlu disiapkan adalah database server m
 # 1. Persiapkan Database
 Buat tabel user pada database dengan SQL berikut:
 
-```
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
+
 CREATE TABLE user (
   id INT(11) auto_increment,
   username VARCHAR(200) NOT NULL,
@@ -51,22 +25,13 @@ CREATE TABLE user (
   userpassword VARCHAR(200),
   PRIMARY KEY(id)
 );
-```
-<<<<<<< HEAD
 
-![alt text](img/database.png)
-
-#### 2. Membuat Model User
-
-Buat model `UserModel.php` pada direktori `app/Models`:
-=======
 ![database](https://github.com/user-attachments/assets/4f3a4de4-d21c-4a2b-ab89-842afb684736)
 
 # 2. Membuat Model User
 Selanjutnya adalah membuat Model untuk memproses data Login. Buat file baru pada direktori app/Models dengan nama UserModel.php
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
 
-```php
+php
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
@@ -78,20 +43,14 @@ class UserModel extends Model
     protected $useAutoIncrement = true;
     protected $allowedFields = ['username', 'useremail', 'userpassword'];
 }
-```
 
-<<<<<<< HEAD
-#### 3. Membuat Controller User
 
-Buat controller `User.php` dengan method `index()` dan `login()` untuk mengelola user dan login:
-=======
 # 3.Membuat Controller User
 Buat Controller baru dengan nama User.php pada direktori app/Controllers.
 
 Kemudian tambahkan method index() untuk menampilkan daftar user, dan method login() untuk proses login.
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
 
-```php
+php
 <?php
 
 namespace App\Controllers;
@@ -148,18 +107,12 @@ class User extends BaseController
         }
     }
 }
-```
 
-<<<<<<< HEAD
-#### 4. Membuat View Login
 
-Buat view `login.php` untuk form login:
-=======
 # 4. Membuat View Login
 Buat direktori baru dengan nama user pada direktori app/views, kemudian buat file baru dengan nama login.php.
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
 
-```html
+html
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -202,27 +155,18 @@ Buat direktori baru dengan nama user pada direktori app/views, kemudian buat fil
 		</div>
 	</body>
 </html>
-```
-<<<<<<< HEAD
 
-#### 5. Membuat Database Seeder
-
-Database seeder digunakan untuk membuat data dummy. Untuk keperluan ujicoba modul login, kita perlu memasukkan data user dan password kedaalam database. Untuk itu buat database seeder untuk tabel user. Buka CLI, kemudian tulis perintah berikut:
-
-```php
-=======
 # 5. Membuat Seeder untuk Database
 
 Seeder database berfungsi untuk mengisi data awal atau data percobaan. Dalam rangka pengujian modul login, kita perlu menambahkan data akun pengguna beserta kata sandinya ke dalam tabel user. Untuk itu, kita perlu membuat seeder khusus untuk tabel user. Buka Command Line Interface (CLI), lalu jalankan perintah berikut:
 
-```
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
+
 php spark make:seeder UserSeeder
-```
+
 
 Selanjutnya, buka file UserSeeder.php yang berada di lokasi direktori/app/Database/Seeds/UserSeeder.php kemudian isi dengan kode berikut:
 
-```php
+php
 <?php
 
 namespace App\Database\Seeds;
@@ -241,35 +185,21 @@ class UserSeeder extends Seeder
         ]);
     }
 }
-```
+
 
 Selanjutnya buka kembali CLI dan ketik perintah berikut:
 
-<<<<<<< HEAD
-```php
+
 php spark db:seed UserSeeder
-```
 
-#### Uji Coba Login
 
-![alt text](img/auth.png)
-
-#### 6. Membuat Filter Auth
-
-Buat filter `Auth.php` untuk membatasi akses ke halaman admin:
-=======
-```
-php spark db:seed UserSeeder
-```
-
-# *uji coba login*
+# uji coba login
 ![auth](https://github.com/user-attachments/assets/cdad4a70-f0a8-4c88-bfee-526f8730523c)
 
 # 6. Menambahkan Auth Filter
 Selanjutnya membuat filer untuk halaman admin. Buat file baru dengan nama Auth.php pada direktori app/Filters.
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
 
-```php
+php
 <?php namespace App\Filters;
 
 use CodeIgniter\HTTP\RequestInterface;
@@ -291,33 +221,13 @@ class Auth implements FilterInterface
         // Do something here
     }
 }
-```
+
 
 Selanjutnya buka file app/Config/Filters.php tambahkan kode berikut:
 
-<<<<<<< HEAD
-```php
+
 'auth' => App\Filters\Auth::class
-```
 
-![alt text](<img/Auth Filters.png>)
-Selanjutnya buka file app/Config/Routes.php dan sesuaikan kodenya.
-![alt text](img/Routes.png)
-
-#### 7. Percobaan Akses Menu Admin
-
-Buka url dengan alamat http://localhost:8080/admin/artikel ketika alamat tersebut diakses maka, akan dimuculkan halaman login.
-![alt text](img/auth.png)
-
-#### 8. Fungsi Logout
-
-Tambahkan method logout pada Controller User seperti berikut:
-
-```php
-=======
-```
-'auth' => App\Filters\Auth::class
-```
 
 ![Auth Filters](https://github.com/user-attachments/assets/a649de5b-1bb2-499a-a85d-3fcfc529d8a2)
 
@@ -333,26 +243,14 @@ Buka url dengan alamat http://localhost:8080/admin/artikel ketika alamat tersebu
 # 8. Fungsi Logout
 Tambahkan method logout pada Controller User seperti berikut:
 
-```
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
+
 public function logout()
     {
         session()->destroy();
         return redirect()->to('/user/login');
     }
-```
 
-<<<<<<< HEAD
----
 
-### **Praktikum 5: Pagination dan Pencarian**
-
-#### 1. Membuat Pagination
-
-Modifikasi controller artikel untuk menambahkan pagination:
-
-```php
-=======
 # Praktikum 5: Pagination dan Pencarian
 
 # Langkah-Langkah Praktikum
@@ -363,8 +261,7 @@ Di CodeIgniter 4, fitur pagination sudah disediakan melalui Library bawaan, sehi
 
 Untuk menerapkan pagination, silakan buka kembali Controller bernama Artikel, lalu lakukan penyesuaian pada method admin_index seperti contoh berikut:
 
-```
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
+
 public function admin_index()
 {
     $title = 'Daftar Artikel';
@@ -376,27 +273,13 @@ public function admin_index()
     ];
     return view('artikel/admin_index', $data);
 }
-```
-<<<<<<< HEAD
-Kemudian buka file views/artikel/admin_index.php dan tambahkan kode berikut dibawah deklarasi tabel data.
-```php
-<?= $pager->links(); ?>
-```
-Selanjutnya buka kembali menu daftar artikel, tambahkan data lagi untuk melihat hasilnya.
-![alt text](img/pagination.png)
 
-#### 2. Membuat Pencarian
-
-Modifikasi controller untuk menambahkan pencarian data:
-
-```php
-=======
 
 Kemudian buka file views/artikel/admin_index.php dan tambahkan kode berikut dibawah deklarasi tabel data.
 
-```
+
 <?= $pager->links(); ?>
-```
+
 
 Selanjutnya buka kembali menu daftar artikel, tambahkan data lagi untuk melihat hasilnya.
 
@@ -407,8 +290,7 @@ Pencarian data digunakan untuk memfilter data.
 
 Untuk membuat pencarian data, buka kembali Controller Artikel, pada method admin_index ubah kodenya seperti berikut:
 
-```
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
+
 public function admin_index()
     {
         $title = 'Daftar Artikel';
@@ -422,48 +304,22 @@ public function admin_index()
         ];
         return view('artikel/admin_index', $data);
     }
-```
-<<<<<<< HEAD
-Kemudian buka kembali file views/artikel/admin_index.php dan tambahkan form pencarian sebelum deklarasi tabel seperti berikut:
-```html
-=======
+
 
 Kemudian buka kembali file views/artikel/admin_index.php dan tambahkan form pencarian sebelum deklarasi tabel seperti berikut:
 
-```
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
+
 <form method="get" class="form-search">
     <input type="text" name="q" value="<?= $q; ?>" placeholder="Cari data">
     <input type="submit" value="Cari" class="btn btn-primary">
 </form>
-```
-<<<<<<< HEAD
-Dan pada link pager ubah seperti berikut.
-```php
-<?= $pager->only(['q'])->links(); ?>
-```
 
-#### 3. Uji Coba Pagination dan Pencarian
-
-Selanjutnya ujicoba dengan membuka kembali halaman admin artikel, masukkan kata kunci tertentu pada form pencarian.
-![alt text](img/search.png)
-
----
-
-### **Praktikum 6: Upload File Gambar**
-
-#### 1. Modifikasi Controller Artikel
-
-Buka kembali Controller Artikel pada project sebelumnya, sesuaikan kode pada method add seperti berikut:
-
-```php
-=======
 
 Dan pada link pager ubah seperti berikut.
 
-```
+
 <?= $pager->only(['q'])->links(); ?>
-```
+
 
 # 3. Uji Coba Pagination dan Pencarian
 Buka kembali halaman admin artikel, lalu masukkan kata kunci tertentu pada kolom pencarian untuk memastikan fitur pencarian berfungsi dengan baik.
@@ -478,8 +334,7 @@ Menambahkan fungsi unggah gambar pada tambah artikel.
 
 Buka kembali Controller Artikel pada project sebelumnya, sesuaikan kode pada method add seperti berikut:
 
-```
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
+
 public function add()
     {
         // validasi data.
@@ -501,51 +356,23 @@ public function add()
         $title = "Tambah Artikel";
         return view('artikel/form_add', compact('title'));
     }
-```
 
-<<<<<<< HEAD
-#### 2. Modifikasi View Artikel
 
-Tambahkan field input file pada form artikel:
-
-```html
-=======
 # 2. Modifikasi View Artikel
 
 Kemudian pada file views/artikel/form_add.php tambahkan field input file seperti berikut.
 
-```
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
+
 <p>
     <input type="file" name="gambar">
 </p>
-```
-<<<<<<< HEAD
-Dan sesuaikan tag form dengan menambahkan ecrypt type seperti berikut.
-```html
-<form action="" method="post" enctype="multipart/form-data">
-```
 
-#### 3. Uji Coba Upload Gambar
-
-Akses menu tambah artikel dan uji coba upload gambar.
-![alt text](<img/add file.png>)
----
-
-## Laporan Praktikum
-
-1. Pastikan untuk screenshot setiap perubahan yang dilakukan pada setiap langkah praktikum.
-2. Update file `README.md` dan tuliskan penjelasan serta screenshot dari setiap langkah praktikum.
-3. Commit hasilnya pada repository dan kirimkan URL repository ke e-learning.
-
----
-=======
 
 Dan sesuaikan tag form dengan menambahkan ecrypt type seperti berikut.
 
-```
+
 <form action="" method="post" enctype="multipart/form-data">
-```
+
 
 # 3. Pengujian Fitur Unggah Gambar
 
@@ -559,8 +386,6 @@ Akses menu tambah artikel dan uji coba upload gambar.
 # LAPORAN PRAKTIKUM 
 
 1. Kerjakan semua latihan yang diberikan sesuai urutannya.
-2. Screenshot setiap perubahannya.
-3.  Update file README.md dan tuliskan penjelasan dari setiap langkah praktikum beserta screenshotnya.
+2. Screenshot setiap perubahannya.3.  Update file README.md dan tuliskan penjelasan dari setiap langkah praktikum beserta screenshotnya.
 4. Commit hasilnya pada repository masing-masing.
 5. Kirim URL repository pada e-learning ecampus
->>>>>>> 2b7983f5463ef7c9e16aedb07d2b409bcce3bb5c
