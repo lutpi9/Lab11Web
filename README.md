@@ -17,7 +17,7 @@ Untuk memulai membuat modul Login, yang perlu disiapkan adalah database server m
 # 1. Persiapkan Database
 Buat tabel user pada database dengan SQL berikut:
 
-
+```
 CREATE TABLE user (
   id INT(11) auto_increment,
   username VARCHAR(200) NOT NULL,
@@ -25,13 +25,13 @@ CREATE TABLE user (
   userpassword VARCHAR(200),
   PRIMARY KEY(id)
 );
-
+```
 ![database](https://github.com/user-attachments/assets/4f3a4de4-d21c-4a2b-ab89-842afb684736)
 
 # 2. Membuat Model User
 Selanjutnya adalah membuat Model untuk memproses data Login. Buat file baru pada direktori app/Models dengan nama UserModel.php
 
-php
+```php
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
@@ -43,14 +43,14 @@ class UserModel extends Model
     protected $useAutoIncrement = true;
     protected $allowedFields = ['username', 'useremail', 'userpassword'];
 }
-
+```
 
 # 3.Membuat Controller User
 Buat Controller baru dengan nama User.php pada direktori app/Controllers.
 
 Kemudian tambahkan method index() untuk menampilkan daftar user, dan method login() untuk proses login.
 
-php
+```php
 <?php
 
 namespace App\Controllers;
@@ -107,12 +107,12 @@ class User extends BaseController
         }
     }
 }
-
+```
 
 # 4. Membuat View Login
 Buat direktori baru dengan nama user pada direktori app/views, kemudian buat file baru dengan nama login.php.
 
-html
+```html
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -155,18 +155,19 @@ html
 		</div>
 	</body>
 </html>
+```
 
 # 5. Membuat Seeder untuk Database
 
 Seeder database berfungsi untuk mengisi data awal atau data percobaan. Dalam rangka pengujian modul login, kita perlu menambahkan data akun pengguna beserta kata sandinya ke dalam tabel user. Untuk itu, kita perlu membuat seeder khusus untuk tabel user. Buka Command Line Interface (CLI), lalu jalankan perintah berikut:
 
-
+```
 php spark make:seeder UserSeeder
-
+```
 
 Selanjutnya, buka file UserSeeder.php yang berada di lokasi direktori/app/Database/Seeds/UserSeeder.php kemudian isi dengan kode berikut:
 
-php
+```php
 <?php
 
 namespace App\Database\Seeds;
@@ -185,13 +186,13 @@ class UserSeeder extends Seeder
         ]);
     }
 }
-
+```
 
 Selanjutnya buka kembali CLI dan ketik perintah berikut:
 
-
+```
 php spark db:seed UserSeeder
-
+```
 
 # uji coba login
 ![auth](https://github.com/user-attachments/assets/cdad4a70-f0a8-4c88-bfee-526f8730523c)
@@ -199,7 +200,7 @@ php spark db:seed UserSeeder
 # 6. Menambahkan Auth Filter
 Selanjutnya membuat filer untuk halaman admin. Buat file baru dengan nama Auth.php pada direktori app/Filters.
 
-php
+```php
 <?php namespace App\Filters;
 
 use CodeIgniter\HTTP\RequestInterface;
@@ -221,13 +222,13 @@ class Auth implements FilterInterface
         // Do something here
     }
 }
-
+```
 
 Selanjutnya buka file app/Config/Filters.php tambahkan kode berikut:
 
-
+```
 'auth' => App\Filters\Auth::class
-
+```
 
 ![Auth Filters](https://github.com/user-attachments/assets/a649de5b-1bb2-499a-a85d-3fcfc529d8a2)
 
@@ -243,13 +244,13 @@ Buka url dengan alamat http://localhost:8080/admin/artikel ketika alamat tersebu
 # 8. Fungsi Logout
 Tambahkan method logout pada Controller User seperti berikut:
 
-
+```
 public function logout()
     {
         session()->destroy();
         return redirect()->to('/user/login');
     }
-
+```
 
 # Praktikum 5: Pagination dan Pencarian
 
@@ -261,7 +262,7 @@ Di CodeIgniter 4, fitur pagination sudah disediakan melalui Library bawaan, sehi
 
 Untuk menerapkan pagination, silakan buka kembali Controller bernama Artikel, lalu lakukan penyesuaian pada method admin_index seperti contoh berikut:
 
-
+```
 public function admin_index()
 {
     $title = 'Daftar Artikel';
@@ -273,13 +274,13 @@ public function admin_index()
     ];
     return view('artikel/admin_index', $data);
 }
-
+```
 
 Kemudian buka file views/artikel/admin_index.php dan tambahkan kode berikut dibawah deklarasi tabel data.
 
-
+```
 <?= $pager->links(); ?>
-
+```
 
 Selanjutnya buka kembali menu daftar artikel, tambahkan data lagi untuk melihat hasilnya.
 
@@ -290,7 +291,7 @@ Pencarian data digunakan untuk memfilter data.
 
 Untuk membuat pencarian data, buka kembali Controller Artikel, pada method admin_index ubah kodenya seperti berikut:
 
-
+```
 public function admin_index()
     {
         $title = 'Daftar Artikel';
@@ -304,22 +305,22 @@ public function admin_index()
         ];
         return view('artikel/admin_index', $data);
     }
-
+```
 
 Kemudian buka kembali file views/artikel/admin_index.php dan tambahkan form pencarian sebelum deklarasi tabel seperti berikut:
 
-
+```
 <form method="get" class="form-search">
     <input type="text" name="q" value="<?= $q; ?>" placeholder="Cari data">
     <input type="submit" value="Cari" class="btn btn-primary">
 </form>
-
+```
 
 Dan pada link pager ubah seperti berikut.
 
-
+```
 <?= $pager->only(['q'])->links(); ?>
-
+```
 
 # 3. Uji Coba Pagination dan Pencarian
 Buka kembali halaman admin artikel, lalu masukkan kata kunci tertentu pada kolom pencarian untuk memastikan fitur pencarian berfungsi dengan baik.
@@ -334,7 +335,7 @@ Menambahkan fungsi unggah gambar pada tambah artikel.
 
 Buka kembali Controller Artikel pada project sebelumnya, sesuaikan kode pada method add seperti berikut:
 
-
+```
 public function add()
     {
         // validasi data.
@@ -356,23 +357,23 @@ public function add()
         $title = "Tambah Artikel";
         return view('artikel/form_add', compact('title'));
     }
-
+```
 
 # 2. Modifikasi View Artikel
 
 Kemudian pada file views/artikel/form_add.php tambahkan field input file seperti berikut.
 
-
+```
 <p>
     <input type="file" name="gambar">
 </p>
-
+```
 
 Dan sesuaikan tag form dengan menambahkan ecrypt type seperti berikut.
 
-
+```
 <form action="" method="post" enctype="multipart/form-data">
-
+```
 
 # 3. Pengujian Fitur Unggah Gambar
 
